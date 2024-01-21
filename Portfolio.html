@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Sanjana Prodduturu's Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('gif gurl.gif') center/cover no-repeat fixed;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            width: 100%;
+            padding: 20px;
+            transition: margin-left 0.5s;
+            margin-left: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            background-color: transparent;
+            color: #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        
+       
+        .welcome-note {
+            background-color: #1a1a1a; /* Lighter black background */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 30% 30px auto;
+            text-align: center;
+            color: #fff;
+            position:relative;
+            overflow: hidden;
+            top: 50%;
+            left: 30%;
+            animation: slideIn 1s ease-out, fadeIn 1s ease-out;
+            display: inline-block;
+        }
+        
+        .explore-section {
+        margin-top: 5px; /* Adjust the margin-top as needed to reduce space */
+        }
+        
+        .audio-container {
+         display: none;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+       
+        
+        .welcome-note:before {
+            content: '';
+            position: absolute;
+            width: 30px; /* Adjust as needed */
+            height: 30px; /* Adjust as needed */
+            background-color: #1a1a1a; /* Same color as the note */
+            clip-path: polygon(100% 0%, 0 0%, 0 100%);
+            top: 0;
+            right: 0;
+        }    
+        .welcome-note p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        #toggle-sidebar-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #2980b9;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+        }
+
+        #toggle-sidebar-button:hover {
+            background-color: #1f618d;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 2;
+            position: fixed;
+            height: 25%;
+            width: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+            left: 0;
+            margin-top: -185px;
+        }
+
+        .nav-section {
+            margin-bottom: 10px;
+        }
+
+        .nav-heading {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .nav-link {
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            background-color: #1f2328;
+        }
+
+        .slider-container {
+            overflow: hidden;
+            margin-bottom: 100px;
+            z-index: 1;
+        }
+
+        .slider-content {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item {
+            flex: 1;
+            padding: 10px;
+            background-color: #3498db;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .slider-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slider-item:hover {
+            transform: scale(1.05);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #007BFF;
+            border-radius: 5px;
+            margin-top: 20px;
+            flex-shrink: 0;
+        }
+
+        .content-margin {
+            margin-left: 0;
+            z-index: 1;
+        }
+
+        #contents-heading {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #3498db;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .overlay-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 20px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    
+
+<audio id="clickSound">
+    <source src="click sound.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+
+
+<div id="main-content" class="content-margin">
+
+   
+       <div class="welcome-note">
+        <p>👋 Hi, I'm Sai Sanjana Prodduturu - a UX, Research, and Strategy enthusiast! <br>
+            Welcome to my digital space where I share my journey of building and learning. <br>
+            Explore to know more about me and my work. 🚀</p>
+             
+            
+        </div>
+    
+    <button id="toggle-sidebar-button" onclick="toggleSidebar()">☰ </button>
+    
+    
+    <div class="overlay" onclick="closeSidebar()" id="overlay"></div>
+
+    <nav id="sidebar">
+        <span class="overlay-close" onclick="closeSidebar()">✖</span>
+        <div class="nav-section">
+            <div class="nav-heading">Explore</div>
+            <a href="javascript:void(0);" class="nav-link" onclick="openTab('aboutMe')">About Me</a>
+            <a href="javascript:void(0);" class="nav-link" onclick="openTab('projects')">Projects</a>
+            <a href="javascript:void(0);" class="nav-link" onclick="openTab('papers')">Papers Published</a>
+            <a href="javascript:void(0);" class="nav-link" onclick="openTab('experience')">Experience</a>
+        </div>
+    </nav>
+
+    <div class="slider-container">
+        <div class="slider-content">
+            <div class="slider-item" id="aboutMe">
+                <span class="close-button" onclick="closeTab('aboutMe')">X</span>
+                <h2>About Me</h2>
+                <p>Welcome to my world! 👩‍💻I am passionate about User Experience, Research, and Strategy. With a keen eye for design and a love for problem-solving, I navigate the digital landscape to create meaningful and intuitive experiences.</p>
+                <p>Feel free to reach out to me at <a href="mailto:sanju230201@gmail.com">sanju230201@gmail.com</a>. I'm always open to exciting collaborations and opportunities.</p>
+                <p>Download my <a href="https://drive.google.com/file/d/1PXJ8ZPH7rjhJP5zY_vRz5vMnS4ST2th2/view?usp=drive_link" target="_blank">Resume</a> for more details about my skills and experiences.</p>
+            </div>
+            <div class="slider-item" id="projects">
+                <span class="close-button" onclick="closeTab('projects')">X</span>
+                <h2>Projects</h2>
+                <p class="project-description">
+                    Explore my latest projects below!🌟 From workout tracker apps to sample prototyping,
+                    designing, and a study buddy platform  📚, discover a variety of projects showcasing my skills 🎨.
+                </p>
+                
+                <div class="access-button-container">
+                    <a href="projects.html" class="access-button" target="_blank">Click Here to Access Projects</a>
+                </div>
+            </div>
+            <div class="slider-item" id="papers">
+                <span class="close-button" onclick="closeTab('papers')">X</span>
+                <h2>Papers Published</h2>
+                <!-- Published Paper 1 -->
+                <div class="section">
+                    
+                    <h3>KINEMATIC POSE TRACKING FOR WORKOUT APP USING COMPUTER VISION</h3>
+                    <p>Journal: International Research Journal of Modernization in Engineering Technology and Science (IRJMETS)</p>
+                    <p>Article Number: 2582-5208</p>
+                    <p>Team Members: Saniya Shaikh 1, Sai Sanjana Prodduturu 2, Anushka Shrirao 3, Rudraksh Naik 4, Anandkumar Birajdar 5</p>
+                    <a href="https://www.doi.org/10.56726/IRJMETS33856" target="_blank">Read Article</a>
+                </div>
+            </div>
+            <div class="slider-item" id="experience">
+                <span class="close-button" onclick="closeTab('experience')">X</span>
+                <h2>Experience</h2>
+                <p>As an Associate Researcher at Sanskar Fashions Ltd in 2023, I played a crucial role in driving user-centric innovation and research initiatives.</p>
+                <p><strong>Job Description:</strong></p>
+                <ul>
+                    <li>Conducted comprehensive user experience research to understand customer behaviors and preferences.</li>
+                    <li>Executed detailed field surveys, gathering valuable insights into market trends.</li>
+                    <li>Conducted in-depth interviews to uncover user needs and expectations.</li>
+                    <li>Performed market analysis with a specific focus on gaming zones and arcades.</li>
+                </ul>
+                <p><strong>How it helped me:</strong></p>
+                <ul>
+                    <li>Expanded my knowledge about the industry and its dynamic landscape.</li>
+                    <li>Gained a deep understanding of user-centric requirements.</li>
+                    <li>Conducted insightful market analysis contributing to strategic decision-making.</li>
+                    <li>Developed a keen sense for businesses and their unique challenges.</li>
+                    <li>Acquired valuable experience that continues to shape my journey in user experience.</li>
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p style="margin: 0;">&copy; 2024 Sai SaiSanjana Prodduturu. All rights reserved.</p>
+</footer>
+
+<script>
+    var activeTab = null;
+
+    function playClickSound() {
+        var clickSound = document.getElementById('clickSound');
+        clickSound.play();
+    }
+    
+   
+    
+    function openTab(tabName) {
+        playClickSound();
+        var sections = document.getElementsByClassName("slider-item");
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.remove('active');
+        }
+        document.getElementById(tabName).classList.add('active');
+        document.getElementById('overlay').classList.add('active');
+        document.getElementById('sidebar').style.width = '250px';
+        document.getElementById('main-content').style.marginLeft = '250px';
+        activeTab = tabName;
+        
+      
+    
+    }
+
+    function closeTab(tabName) {
+        playClickSound();
+        document.getElementById(tabName).classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('sidebar').style.width = '0';
+        document.getElementById('main-content').style.marginLeft = '0';
+        activeTab = null;
+    }
+
+    function toggleSidebar() {
+        var sidebar = document.getElementById('sidebar');
+        if (sidebar.style.width === '0px' || sidebar.style.width === '') {
+            openSidebar();
+        } else {
+            closeSidebar();
+        }
+    }
+
+    function openSidebar() {
+        document.getElementById('sidebar').style.width = '250px';
+        document.getElementById('main-content').style.marginLeft = '250px';
+        document.getElementById('overlay').classList.add('active');
+    }
+
+    function closeSidebar() {
+        document.getElementById('sidebar').style.width = '0';
+        document.getElementById('main-content').style.marginLeft = '0';
+        document.getElementById('overlay').classList.remove('active');
+        activeTab = null;
+    }
+    
+   
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
